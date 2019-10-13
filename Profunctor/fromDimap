@@ -9,8 +9,7 @@
       → f b c
       → f a d
     )
-→   { dimap =
-        dimap
+→   { dimap = dimap
     , lmap =
           λ(a : Type)
         → λ(b : Type)

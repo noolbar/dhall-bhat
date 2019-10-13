@@ -1,4 +1,4 @@
-    let DifferenceList = ./Type
+let DifferenceList = ./Type
 
 in    { fold =
             λ(a : Type)

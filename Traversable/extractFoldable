@@ -1,4 +1,4 @@
-    let Traversable = ./Type
+let Traversable = ./Type
 
 in    λ(f : Type → Type)
     → λ(t : Traversable f)

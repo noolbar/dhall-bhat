@@ -8,7 +8,7 @@ in    λ(a : Type)
     → λ(semi : Semigroup a)
     →     ./../functor a
         ∧ { pure =
-              λ(b : Type) → λ(x : b) → < Right = x | Left : a >
+              λ(b : Type) → λ(x : b) → < Right : b | Left : a >.Right x
           , ap =
                 λ(b : Type)
               → λ(c : Type)
@@ -19,14 +19,14 @@ in    λ(a : Type)
                       λ(l : a)
                     → merge
                       { Left =
-                          λ(ll : a) → < Left = semi.op l ll | Right : c >
+                          λ(ll : a) → < Left : a | Right : c >.Left (semi.op l ll)
                       , Right =
-                          λ(_ : b) → < Left = l | Right : c >
+                          λ(_ : b) → < Left : a | Right : c >.Left l
                       }
                       fa
                 , Right =
                         let map = (./../functor a).map
-                    
+
                     in  λ(f : b → c) → map b c f fa
                 }
                 g
