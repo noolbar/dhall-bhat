@@ -43,20 +43,6 @@ But this is a place that becomes easy to get out of sync – if the file is rena
 
 It’s often tempting to use imports directly inlined, like `(./Foo/functor).map`, but as we move toward freezing our imports, we need to add SHAs, which make inlined imports extremely difficult to read. So, pre-emptively, we try to create bindings to avoid having SHAs littered throughout the expression.
 
-### minimal top-level types
-
-In general, we don’t have explicit types on expressions. Since there is only a single top-level expression per file, it’s relatively easy for editors to display the result of `dhall type` to provide a type annotation on the fly.
-
-The exception to this is type class instances, which end up looking like
-```dhall
-    let Foo = ../Foo/Type
-in  let Bar = ./Type
-in  { operation = ...
-    , anotherOperation = ...
-    } : Foo Bar
-```
-This is because it isn’t enough that they have a valid type, but that type needs to align with the type class definition in order to be applicable where that type class is required.
-
 ### don’t define type class methods in their own files
 
 Rather than making each definition its own file, we tend to define methods within the instance. One reason for this is that there are often _multiple_ instances of a type class for a single type, so it’s not always clear which one should be “blessed” at the top-level. E.g., having two incompatible `Applicative` instances isn’t unusual, so defining a “./Foo/ap” can be confusing. See “Either/Sequential/applicative” and “Either/Parallel/applicative” for an example of how multiple instances are defined.
